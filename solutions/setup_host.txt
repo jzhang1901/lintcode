@@ -1,0 +1,25 @@
+Setup Ubuntu 16.04:
+- 1. remove old driver: 
+    sudo apt purge nvidia*
+- 2. install R390 for cuda 9.1
+    sudo add-apt-repository ppa:graphics-drivers/ppa
+    sudo apt-get update
+    sudo apt install nvidia-390
+    # Run nvidia-smi, to make sure driver has been install correctly
+- 3. install cuda-9.1 and cudnn
+    https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1604&target_type=deblocal
+- 4. install ffmpeg 3.2
+    ./configure --enable-gpl --enable-libx264 --enable-nonfree --enable-pic --enable-shared
+- 5. isntall opencv-3.4 and opencv_contrib -3.4
+    cmake -D CMAKE_BUILD_TYPE=RELEASE \
+        -D CMAKE_INSTALL_PREFIX=/usr/local \
+        -D INSTALL_C_EXAMPLES=OFF \
+        -D INSTALL_PYTHON_EXAMPLES=ON \
+        -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
+        -D BUILD_EXAMPLES=ON ..
+- 6. install nvcaffe  
+- 7. install TensorRT 4.0 and its python bindings
+It is better to remove the old version of TensorRT first
+http://docs.nvidia.com/deeplearning/sdk/tensorrt-install-guide/index.html#installing
+- 8. recompile jetson-inference
+https://github.com/dusty-nv/jetson-inference
