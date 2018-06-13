@@ -39,27 +39,26 @@ public:
              vector<string> current, 
              vector<string> &results) {
         
-        if(start >= s.length()) {
+        if((current.size() > 4)) return;
 
-            if(current.size() == 4) {
+        if(start >= s.length() && (current.size() == 4)) {
 
-                string s = current[0] + "." + 
-                           current[1] + "." + 
-                           current[2] + "." + 
-                           current[3];
+            string s = current[0] + "." + 
+                        current[1] + "." + 
+                        current[2] + "." + 
+                        current[3];
 
-                results.push_back(s);
-            }
+            results.push_back(s);
+
             return;
         }
         // This is to prevent 00 case
         int end = s[start] == '0' ? start : s.length();
 
         for(int i = start; i < s.length(); i++) {
-            
             const int l0 = i - start + 1;
             string s0 = s.substr(start, l0);
-            
+            if(l0 > 1 && s0[0] == '0') break;
             int number = convertToNumber(s0);
             if(number < 0) continue;
             if(number > 255) return;
